@@ -1,5 +1,7 @@
 package com.course.rabbitmqtwo;
 
+import java.util.stream.IntStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,8 +22,20 @@ public class RabbitmqProducerTwoApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		DummyMessage dummyMessage = new DummyMessage("this is a test", 1);
-		dummyProducer.sendDummy(dummyMessage);
+		IntStream
+			.range(0, 10000)
+			.forEach(
+					index -> {
+						DummyMessage dummyMessage = new DummyMessage("this is a test", index);
+						dummyProducer.sendDummy(dummyMessage);
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+			);
 	}
 
 }
