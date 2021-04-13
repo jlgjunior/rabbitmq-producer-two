@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.course.rabbitmqtwo.entity.DummyMessage;
 
-@Service
+//@Service
 public class DummyProducer {
 
 	@Autowired
