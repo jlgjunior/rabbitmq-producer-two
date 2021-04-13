@@ -23,17 +23,11 @@ public class RabbitmqProducerTwoApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		IntStream
-			.range(0, 10000)
+			.range(0, 500)
 			.forEach(
 					index -> {
 						DummyMessage dummyMessage = new DummyMessage("this is a test", index);
 						dummyProducer.sendDummy(dummyMessage);
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
 					}
 			);
 	}
