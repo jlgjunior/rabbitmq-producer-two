@@ -1,20 +1,18 @@
 package com.course.rabbitmqtwo;
 
-import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.course.rabbitmqtwo.entity.DummyMessage;
-import com.course.rabbitmqtwo.producer.DummyProducer;
+import com.course.rabbitmqtwo.producer.MultiplePrefetchProducer;
 
 @SpringBootApplication
 public class RabbitmqProducerTwoApplication implements CommandLineRunner{
 
 	@Autowired
-	private DummyProducer dummyProducer;
+	private MultiplePrefetchProducer multiplePrefetchProducer;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(RabbitmqProducerTwoApplication.class, args);
@@ -22,14 +20,8 @@ public class RabbitmqProducerTwoApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		IntStream
-			.range(0, 500)
-			.forEach(
-					index -> {
-						DummyMessage dummyMessage = new DummyMessage("this is a test", index);
-						dummyProducer.sendDummy(dummyMessage);
-					}
-			);
+		multiplePrefetchProducer.simulateScheduler();
+		multiplePrefetchProducer.simulateTransaction();
 	}
 
 }
