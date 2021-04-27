@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.course.rabbitmqtwo.entity.InvoiceCancelledMessage;
 import com.course.rabbitmqtwo.entity.InvoiceCreatedMessage;
 import com.course.rabbitmqtwo.entity.InvoicePaidMessage;
 import com.course.rabbitmqtwo.producer.InvoiceProducer;
@@ -35,6 +36,11 @@ public class RabbitmqProducerTwoApplication implements CommandLineRunner{
 		InvoicePaidMessage invoicePaidMessage = 
 						new InvoicePaidMessage(invoiceNumber, LocalDate.now(), paymentNumber);
 		invoiceProducer.sendInvoicePaid(invoicePaidMessage); 
+		
+		invoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(200, 300);
+		InvoiceCancelledMessage invoiceCancelledMessage = 
+						new InvoiceCancelledMessage(LocalDate.now(), invoiceNumber, "Test reason");
+		invoiceProducer.sendInvoiceCancelled(invoiceCancelledMessage); 
 	}
 
 }
