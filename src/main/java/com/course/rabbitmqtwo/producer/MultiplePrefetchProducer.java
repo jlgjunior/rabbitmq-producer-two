@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.course.rabbitmqtwo.entity.DummyMessage;
 
-@Service
+//@Service
 public class MultiplePrefetchProducer {
 
-	@Autowired
+	//@Autowired
 	private RabbitTemplate rabbitTemplate;
 	
 	public void simulateTransaction() {
